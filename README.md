@@ -1,2 +1,2 @@
-git clone https://github.com/your-org/clawflow.git
+git clone https://github.com/your-username/clawflow.git
    cd clawflow

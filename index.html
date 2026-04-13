@@ -1,76 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clawflow - Coming Soon</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-        .container {
-            text-align: center;
-            padding: 2rem;
-            max-width: 600px;
-        }
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        .tagline {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-        .description {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-            opacity: 0.85;
-        }
-        .badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-        }
-        .footer {
-            position: absolute;
-            bottom: 2rem;
-            left: 0;
-            right: 0;
-            text-align: center;
-            opacity: 0.6;
-            font-size: 0.9rem;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>OpenClaw ? One-Command AI Automation for Business Workflows</title>
+  <meta name="description" content="OpenClaw: automate complex business tasks with a single AI-powered command. Speed up workflows, eliminate repetitive work, scale automation without coding.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://www.openclaw.com/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>🐾 Clawflow</h1>
-        <p class="tagline">AI-Powered Workflow Automation</p>
-        <p class="description">
-            Streamline your business with intelligent automation. 
-            Built for entrepreneurs who want to scale without the overhead.
-        </p>
-        <span class="badge">Coming Soon</span>
+  <a class="skip-link" href="#index-main">Skip to content</a>
+  <header class="index-header" data-component="hero" role="region" aria-label="Hero section">
+    <div class="index-header__nav">
+      <a href="#" class="index-header__logo" data-action="scroll" data-scroll-target="index-main" data-scroll-duration="600">OpenClaw</a>
+      <nav aria-label="Primary navigation">
+        <ul class="index-nav-list">
+          <li><a href="#features" data-action="scroll" data-scroll-target="features" data-scroll-duration="600">Features</a></li>
+          <li><a href="#commands" data-action="scroll" data-scroll-target="commands" data-scroll-duration="600">Examples</a></li>
+          <li><a href="#ai-demo" data-action="scroll" data-scroll-target="ai-demo" data-scroll-duration="600">AI Demo</a></li>
+          <li><a href="#signup-cta" data-action="scroll" data-scroll-target="signup-cta" data-scroll-duration="600">Sign Up</a></li>
+        </ul>
+      </nav>
     </div>
-    <div class="footer">
-        Powered by OpenClaw • Built by Smith Media Marketing
+    <div class="index-header__content util-space-lg">
+      <h1 class="index-header__title">Execute complex tasks with single-command AI workflows</h1>
+      <p class="index-header__tagline">Powerful yet simple AI automation.</p>
+      <button class="index-header__cta" data-action="scroll" data-scroll-target="signup-cta" data-scroll-duration="600">Get Started Free</button>
     </div>
+  </header>
+  <main id="index-main">
+    <section id="features" class="index-features" data-component="features" role="region" aria-label="Features section">
+      <div class="index-features__grid">
+        <article class="index-features__item">
+          <h2 class="index-features__title">Speed</h2>
+          <p class="index-features__desc">Instant execution at lightning-fast speeds.</p>
+        </article>
+        <article class="index-features__item">
+          <h2 class="index-features__title">Ease of Use</h2>
+          <p class="index-features__desc">Intuitive interface requiring no technical expertise.</p>
+        </article>
+        <article class="index-features__item">
+          <h2 class="index-features__title">Leverage</h2>
+          <p class="index-features__desc">Maximize output without extra resources.</p>
+        </article>
+      </div>
+    </section>
+    <section id="commands" class="index-commands" data-component="commands" role="region" aria-label="Commands showcase">
+      <h2 class="index-commands__header">Pre-Built Workflow Examples</h2>
+      <div class="index-commands__grid">
+        <div class="index-commands__card">
+          <pre class="index-commands__code">OpenClaw GenerateLeadList --query="SaaS startups"</pre>
+          <p class="index-commands__desc">Generates targeted lead lists from specified criteria.</p>
+        </div>
+        <div class="index-commands__card">
+          <pre class="index-commands__code">OpenClaw AutoFunnelBuilder --template="EmailSequence"</pre>
+          <p class="index-commands__desc">Builds complete email funnels automatically.</p>
+        </div>
+      </div>
+    </section>
+    <section id="ai-demo" class="index-demo" data-component="demo" role="region" aria-label="AI content generation demo">
+      <h2 class="index-demo__header">Live AI Demo</h2>
+      <div id="index-demo-container" class="index-demo__container" data-demo-type="content-generation">
+        <button id="index-demo-run" type="button" class="index-demo__button" data-action="launch" aria-describedby="demo-desc">Run Demo</button>
+        <p id="demo-desc" class="visually-hidden">Click to launch the AI content generation demo.</p>
+        <div id="demo-status" class="visually-hidden" aria-live="polite"></div>
+        <input type="text" id="demo-input" class="index-demo__input" placeholder="Enter a prompt to generate content">
+        <pre id="demo-output" class="index-demo__output script-demo-output" aria-live="polite"></pre>
+      </div>
+    </section>
+    <section id="signup-cta" class="index-signup" data-component="cta" role="region" aria-label="Signup call to action">
+      <div class="index-signup__wrapper">
+        <h2 class="index-signup__header">Ready to Automate?</h2>
+        <p class="index-signup__desc">Join hundreds of businesses automating workflows with OpenClaw.</p>
+        <form id="index-signup-form" class="index-signup__form" action="/signup" method="POST">
+          <label for="index-email" class="visually-hidden">Email address</label>
+          <input type="email" id="index-email" name="email" placeholder="you@example.com" required>
+          <button type="submit" class="index-signup__button" data-action="submit">Sign Up Free</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer class="index-footer" role="contentinfo">
+    <p class="index-footer__text">? 2026 OpenClaw. All rights reserved.</p>
+  </footer>
+  <script type="module" defer src="script.js"></script>
 </body>
 </html>

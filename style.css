@@ -261,12 +261,13 @@ button:focus-visible {
 
 /* Features section */
 .index-features {
-  padding: var(--space-lg) var(--space-md);
+  padding: var(--space-xxl) var(--space-md);
 }
 .index-features__grid {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
+  display: grid;
+  grid-template-columns: var(--grid-columns);
+  gap: var(--grid-gap);
+  justify-items: center;
 }
 .index-features__item {
   background: #f9f9f9;
@@ -291,7 +292,7 @@ button:focus-visible {
 
 /* Commands showcase */
 .index-commands {
-  padding: var(--space-lg) var(--space-md);
+  padding: var(--space-xxl) var(--space-md);
 }
 .index-commands__header {
   font-size: var(--font-size-xl);
@@ -302,6 +303,7 @@ button:focus-visible {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--grid-gap);
+  justify-items: center;
 }
 .index-commands__card {
   background: #f9f9f9;
@@ -309,6 +311,10 @@ button:focus-visible {
   border-radius: var(--space-xs);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: none;
+}
+.index-commands__card:first-child {
+  display: block;
 }
 .index-commands__card:hover,
 .index-commands__card:focus-within {
@@ -327,18 +333,13 @@ button:focus-visible {
   font-size: var(--font-size-md);
   color: var(--color-muted);
 }
-
-/* Commands carousel state */
-.index-commands__card {
-  display: none;
-}
 .index-commands__card.is-active {
   display: block;
 }
 
 /* AI demo */
 .index-demo {
-  padding: var(--space-lg) var(--space-md);
+  padding: var(--space-xxl) var(--space-md);
   text-align: center;
 }
 .index-demo__header {
@@ -349,6 +350,8 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: var(--space-md);
 }
 .index-demo__button {
@@ -377,17 +380,17 @@ button:focus-visible {
 .index-demo__input:focus-visible {
   border-color: var(--color-primary);
   box-shadow: 0 0 0 2px rgba(0,85,255,0.2);
-  outline: none;
 }
 .index-demo__output {
   font-size: var(--font-size-md);
   color: var(--color-text);
   margin-top: var(--space-md);
+  font-family: monospace;
 }
 
 /* Signup CTA */
 .index-signup {
-  padding: var(--space-lg) var(--space-md);
+  padding: var(--space-xxl) var(--space-md);
   background: #f5f6f8;
   text-align: center;
 }
@@ -421,7 +424,6 @@ button:focus-visible {
 .index-signup__form input[type="email"]:focus-visible {
   border-color: var(--color-primary);
   box-shadow: 0 0 0 2px rgba(0,85,255,0.2);
-  outline: none;
 }
 .index-signup__button {
   background-color: var(--color-primary);
@@ -458,15 +460,16 @@ button:focus-visible {
   .index-commands__grid {
     grid-template-columns: var(--grid-columns);
   }
+  .index-commands__card {
+    display: block;
+  }
 }
 @media (min-width: 768px) {
   :root {
     --grid-columns: repeat(3, 1fr);
   }
   .index-features__grid {
-    display: grid;
     grid-template-columns: var(--grid-columns);
-    gap: var(--grid-gap);
   }
   .index-commands__grid {
     grid-template-columns: var(--grid-columns);

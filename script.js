@@ -67,7 +67,7 @@ function throttle(func, wait) {
 
 /**
  * Binds click handlers for smooth page navigation on elements marked with data-action="scroll".
- * Also validates supported data-action values.
+ * Also validates supported data-action values and emits CTA click events.
  */
 function initSmoothScrolling() {
   const scrollLinks = document.querySelectorAll('[data-action="scroll"]');
@@ -85,7 +85,20 @@ function initSmoothScrolling() {
       document.dispatchEvent(new CustomEvent('scroll:clicked', {
         detail: { targetSection }
       }));
-      smoothScroll(targetSection, duration);
+      const isCTA = link.closest('[data-component="hero"], [data-component="cta"]');
+      if (isCTA) {
+        document.dispatchEvent(new CustomEvent('cta:clicked', {
+          detail: { targetSection }
+        }));
+      }
+      smoothScroll(targetSection, duration).then(() => {
+        const targetEl = document.getElementById(targetSection);
+        if (targetEl) {
+          targetEl.setAttribute('tabindex', '-1');
+          targetEl.focus();
+        }
+        link.blur();
+      });
     });
   });
   const validActions = ['scroll', 'launch', 'submit'];
@@ -100,19 +113,45 @@ function initSmoothScrolling() {
 /**
  * Sets up IntersectionObserver to reveal sections when they enter the viewport.
  * Emits "section:entered" when a section crosses 50% visibility.
+ * Adds staggered reveals for child elements for a smoother experience.
  */
 function initScrollReveal() {
   const components = ['hero', 'features', 'commands', 'demo', 'cta'];
+  // Fallback for browsers without IntersectionObserver
+  if (!('IntersectionObserver' in window)) {
+    console.warn('initScrollReveal: IntersectionObserver not supported, revealing all components');
+    components.forEach(name => {
+      const el = document.querySelector(`[data-component="${name}"]`);
+      if (el) {
+        el.classList.add('is-visible');
+      } else {
+        console.warn(`initScrollReveal: component ${name} not found`);
+      }
+    });
+    return;
+  }
   const options = { threshold: 0.5 };
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        const section = entry.target.dataset.component;
+        const container = entry.target;
+        // Stagger reveal child items
+        const children = container.querySelectorAll(
+          '.index-features__item, .index-commands__card, .index-demo__container > *, .index-signup__wrapper > *'
+        );
+        if (children.length) {
+          children.forEach((child, i) => {
+            child.style.transitionDelay = `${i * 100}ms`;
+            child.classList.add('is-visible');
+          });
+        } else {
+          container.classList.add('is-visible');
+        }
+        const section = container.dataset.component;
         document.dispatchEvent(new CustomEvent('section:entered', {
           detail: { section }
         }));
-        observer.unobserve(entry.target);
+        observer.unobserve(container);
       }
     });
   }, options);
@@ -131,7 +170,7 @@ function initScrollReveal() {
  * Highlights the nav link whose section is centered in the viewport.
  */
 function initScrollSpy() {
-  const navLinks = document.querySelectorAll('[data-action="scroll"]');
+  const navLinks = document.querySelectorAll('.index-nav-list a[data-action="scroll"]');
   const sections = [];
   navLinks.forEach(link => {
     const target = link.getAttribute('data-scroll-target');
@@ -216,12 +255,15 @@ function initAIDemo() {
       document.dispatchEvent(new CustomEvent('demo:run', {
         detail: { demoType }
       }));
-      let output = container.querySelector('.script-demo-output');
+      let output = document.getElementById('demo-output');
       if (output) {
         output.textContent = '';
       } else {
-        output = document.createElement('p');
-        output.className = 'index-demo__output script-demo-output';
+        console.warn('initAIDemo: #demo-output element not found');
+        output = document.createElement('pre');
+        output.id = 'demo-output';
+        output.className = 'index-demo__output';
+        output.setAttribute('aria-live', 'polite');
         container.appendChild(output);
       }
       const text = 'OpenClaw AI Demo: Generating content instantly.';
